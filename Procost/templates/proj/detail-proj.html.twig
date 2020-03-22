@@ -1,0 +1,109 @@
+{% extends './base.html.twig' %}
+{% block body %}
+    <body class="app sidebar-mini">
+    <!-- Navbar -->
+    <header class="app-header"><a class="app-header__logo" href="http://localhost:8000/">Procost</a>
+        <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+            <li class="app-search">
+                <a href="http://localhost:8000/connect/" class="btn btn-info">Se déconnecter</a>
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" src="img/user.jpg" alt="User Image">
+            <div>
+                <p class="app-sidebar__user-name">John Doe</p>
+                <p class="app-sidebar__user-designation">Manager</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li>
+                <a class="app-menu__item active" href="http://localhost:8000/">
+                    <i class="app-menu__icon fa fa-dashboard"></i>
+                    <span class="app-menu__label">Tableau de bord</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="http://localhost:8000/projet/">
+                    <i class="app-menu__icon fa fa-laptop"></i>
+                    <span class="app-menu__label">Projets</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="http://localhost:8000/employe/">
+                    <i class="app-menu__icon fa fa-users"></i>
+                    <span class="app-menu__label">Employés</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item" href="http://localhost:8000/metier/">
+                    <i class="app-menu__icon fa fa-book"></i>
+                    <span class="app-menu__label">Métiers</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1><i class="fa fa-users"></i>&nbsp;Suivi du  {{projet.nom}}</h1>
+            </div>
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#"><i class="fa fa-home fa-lg"></i></a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Employés</a>
+                </li>
+                <li class="breadcrumb-item">Suivi du  {{projet.nom}}</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="tile" style="width: 600px">
+                    <table class="table table-striped table-bordered table-sm" >
+                        <tbody>
+                        <tr>
+                            <th>Titre </td>
+                            <td> {{projet.nom}}</td>
+                        </tr>
+                        <tr>
+                            <th>Description </td>
+                            <td>{{projet.description}}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</td>
+                            <td> {{projet.prix}}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de creation</td>
+                            <td> {{projet.datecreation| date('Y-m-d') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de livraison</td>
+                            <td> {{projet.datelivraison | date('Y-m-d') }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href={{  path('projet_modif', {'id': projet.id, }) }}  class="btn btn-info">
+                    <i class="fa fa-pencil"></i>Modifier
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        &copy; 2019 - PROCOST
+    </footer>
+
+
+    </body>
+{% endblock %}

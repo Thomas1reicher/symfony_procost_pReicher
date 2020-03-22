@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<body class="app sidebar-mini">
+<!-- Navbar -->
+<header class="app-header"><a class="app-header__logo" href="#">Procost</a>
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        <li class="app-search">
+            <a href="http://localhost:8000/connect/" class="btn btn-info">Se déconnecter</a>
+        </li>
+    </ul>
+</header>
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <div class="app-sidebar__user">
+        <img class="app-sidebar__user-avatar" src="img/user.jpg" alt="User Image">
+        <div>
+            <p class="app-sidebar__user-name">John Doe</p>
+            <p class="app-sidebar__user-designation">Manager</p>
+        </div>
+    </div>
+    <ul class="app-menu">
+        <li>
+            <a class="app-menu__item active" href="http://localhost:8000/">
+                <i class="app-menu__icon fa fa-dashboard"></i>
+                <span class="app-menu__label">Tableau de bord</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href="http://localhost:8000/projet/">
+                <i class="app-menu__icon fa fa-laptop"></i>
+                <span class="app-menu__label">Projets</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href="http://localhost:8000/employe/">
+                <i class="app-menu__icon fa fa-users"></i>
+                <span class="app-menu__label">Employés</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href="http://localhost:8000/metier/">
+                <i class="app-menu__icon fa fa-book"></i>
+                <span class="app-menu__label">Métiers</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+        <main class="app-content">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-dashboard"></i>&nbsp;Tableau de bord</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="widget-small info coloured-icon">
+                                <i class="icon fa fa-spinner fa-3x" aria-hidden="true"></i>
+                                <div class="info">
+                                    <p class="text-muted text-sm text-uppercase">Projets en cours</p>
+                                    <p><strong>{{cournb}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="widget-small warning coloured-icon">
+                                <i class="icon fa fa-check-square-o fa-3x" aria-hidden="true"></i>
+                                <div class="info">
+                                    <p class="text-muted text-sm text-uppercase">Projets livrés</p>
+                                    <p><strong>{{livrenb}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="widget-small primary coloured-icon">
+                                <i class="icon fa fa-users fa-3x"></i>
+                                <div class="info">
+                                    <p class="text-muted text-sm text-uppercase">Employés</p>
+                                    <p><strong>{{nombre}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="widget-small danger coloured-icon">
+                                <i class="icon fa fa-calendar-check-o fa-3x" aria-hidden="true"></i>
+                                <div class="info">
+                                    <p class="text-muted text-sm text-uppercase">Heures de production</p>
+                                    <p><strong>?</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-uppercase">
+                                <div class="card-header text-center">Rentabilité</div>
+                                <div class="card-body">
+                                    <p class="text-muted">
+                                        <i class="fa fa-database mr-2 text-primary"></i> ? RENTABLE
+                                    </p>
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <canvas id="ratio-chart" class="embed-responsive-item"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-uppercase">
+                                <div class="card-header text-center">Taux de livraison</div>
+                                <div class="card-body">
+                                    <p class="text-muted">
+                                        <i class="fa fa fa-check-square-o mr-2 text-primary"></i> {{tauxlivre}}% Livrés
+                                    </p>
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <canvas id="delivered-chart" class="embed-responsive-item"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header text-center text-uppercase">Top employé</div>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <p class="mt-2">
+                                            <strong>{{topemployer.Prenom}}  {{topemployer.metier.metiertitre}}</strong>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="small mt">EMPLOYÉ DEPUIS</p>
+                                            <p>{{topemployer.dateembauche|date('Y-m-d')}}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="small mt">COÛT A L'HEURE</p>
+                                            <p>{{topemployer.cout}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="tile table-responsive">
+                        <h2 class="tile-title">Les derniers projets</h2>
+                        <table class="table table-hover table-striped table-sm">
+                            <thead>
+                            <tr>
+                                <th>Projet</th>
+                                <th>Date de création</th>
+                                <th>Prix de vente</th>
+
+                                <th>Est livré</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for proj in projet %}
+                                <tr>
+                                <th>
+                                    <a href={{ path('projet_detail', {'id': proj.id, }) }} >{{proj.nom}}</a>
+                                </th>
+                                <th>{{proj.datecreation|date('Y-m-d')}}</th>
+                                <th>{{proj.prix}}</th>
+                                {% if (proj.datelivraison > now) %}
+                                <th>
+                                    <span class="badge badge-success">OUI</span>
+                                </th>
+                            {% else %}
+                                <th>
+                                    <span class="badge badge-danger">NON</span>
+                                </th>
+                                {% endif %}
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            &copy; 2019 - PROCOST
+        </footer>
+        {% endblock  %}
+

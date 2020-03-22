@@ -1,0 +1,145 @@
+{% extends './base.html.twig' %}
+{% block body %}
+<body class="app sidebar-mini">
+<!-- Navbar -->
+<header class="app-header"><a class="app-header__logo" href="http://localhost:8000/">Procost</a>
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        <li class="app-search">
+            <a href="http://localhost:8000/connect/" class="btn btn-info">Se déconnecter</a>
+        </li>
+    </ul>
+</header>
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <div class="app-sidebar__user">
+        <img class="app-sidebar__user-avatar" src="img/user.jpg" alt="User Image">
+        <div>
+            <p class="app-sidebar__user-name">John Doe</p>
+            <p class="app-sidebar__user-designation">Manager</p>
+        </div>
+    </div>
+    <ul class="app-menu">
+        <li>
+            <a class="app-menu__item active" href="http://localhost:8000/">
+                <i class="app-menu__icon fa fa-dashboard"></i>
+                <span class="app-menu__label">Tableau de bord</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href="http://localhost:8000/projet/">
+                <i class="app-menu__icon fa fa-laptop"></i>
+                <span class="app-menu__label">Projets</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href="http://localhost:8000/employe/">
+                <i class="app-menu__icon fa fa-users"></i>
+                <span class="app-menu__label">Employés</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href="http://localhost:8000/metier/">
+                <i class="app-menu__icon fa fa-book"></i>
+                <span class="app-menu__label">Métiers</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-users"></i>Ajout d'un Projet</h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#"><i class="fa fa-home fa-lg"></i></a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="#">Employés</a>
+            </li>
+            <li class="breadcrumb-item">Ajout d'un Projet</li>
+        </ul>
+    </div>
+    <div class="tile">
+        <div class="alert alert-dismissible alert-success my-4">
+            <button class="close" type="button" data-dismiss="alert">×</button><strong>Well done!</strong> Message flash.
+        </div>
+        {{ form_start(form) }}
+
+
+        <section>
+
+            <h3>Informations générales</h3>
+            <div class="row mt-4">
+                <div class="offset-md-4 col-md-8">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">Nom</label>
+                        <div class="col-md-9">
+                            {{ form_widget(form.nom, {'attr': {'class':'form-control' } }) }}
+                            {{ form_errors(form.nom, {'attr': {'class':'form-control-feedback text-danger' } }) }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">Description</label>
+                        <div class="col-md-9">
+                            {{ form_widget(form.description, {'attr': {'class':'form-control' } }) }}
+                            {{ form_errors(form.description, {'attr': {'class':'form-control-feedback text-danger' } } )}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <hr/>
+        <section>
+            <h3>Prix et Date </h3>
+            <div class="row mt-4">
+                <div class="offset-md-4 col-md-8">
+                    <div class="form-group row">
+                        <label for="select-job" class="control-label col-md-3">Prix</label>
+                        <div class="col-md-9">
+
+                            {{ form_widget(form.prix, {'attr': {'class':'form-control' } }) }}
+                            {{ form_errors(form.prix, {'attr': {'class':'form-control-feedback text-danger' } }) }}
+
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3">Date de Creation</label>
+                            <div class="col-md-9">
+                                {{ form_widget(form.date_creation, {'attr': {'class':'form-control' } }) }}
+                                {{ form_errors(form.date_creation, {'attr': {'class':'form-control-feedback text-danger' } })}}
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Date de Livraison</label>
+                                <div class="col-md-9">
+                                    {{ form_widget(form.date_livraison, {'attr': {'class':'form-control' } }) }}
+                                    {{ form_errors(form.date_livraison, {'attr': {'class':'form-control-feedback text-danger' } }) }}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        <hr/>
+        <div class="row">
+            <div class="offset-md-6 col-md-6">
+                <input type="submit" class="btn btn-success"><i class="fa fa-save"></i></a>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</main>
+
+<footer class="main-footer">
+    &copy; 2019 - PROCOST
+</footer>
+
+
+</body>
+{% endblock %}
